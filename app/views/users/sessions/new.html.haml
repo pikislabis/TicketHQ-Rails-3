@@ -1,18 +1,14 @@
 %h2 Login
 =form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
-	%ul
-		%li
-			= f.label 'Email'
-			%span.input= f.email_field :email
-
-		%li
-			= f.label 'Contraseña'
-			%span.input= f.password_field :password
+	%div
+		= f.email_field :email, :placeholder => 'Email'
+	
+	%div
+		= f.password_field :password, :placeholder => 'Contraseña'
 
 		-if devise_mapping.rememberable?
-			%li.indent
-				.rememberMe
-					=f.check_box :remember_me
-					=f.label :remember_me, 'Recordarme'
+			%div
+				=f.check_box :remember_me
+				=f.label :remember_me, 'Recordarme'
 
-		%li.button= f.submit 'Entrar', :class => 'submit'
+		%div= f.submit 'Entrar', :class => 'submit'

@@ -1,10 +1,10 @@
 #nav
 	%ul
-		%li.rounded= link_to 'Tickets', :controller => "/tickets", :action => 'index'
+		%li= link_to 'Tickets', :controller => "/tickets", :action => 'index'
 		-if params[:controller] == 'projects' and !params[:id].blank? and Project.proyectos(current_user,"make").include? Project.find(params[:id])
-			%li.rounded= link_to 'Nuevo ticket', new_project_ticket_path(@project.id)			
+			%li= link_to 'Nuevo ticket', new_project_ticket_path(@project.id)			
 		-else
-			%li.rounded= link_to 'Nuevo ticket', new_ticket_path
+			%li= link_to 'Nuevo ticket', new_ticket_path
 		%li.search
 			-form_tag tickets_path, :method => 'get' do
 				%p
