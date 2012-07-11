@@ -221,3 +221,7 @@ Devise.setup do |config|
   #   manager.default_strategies(:scope => :user).unshift :some_external_strategy
   # end
 end
+
+ActionController::Responder.class_eval do
+  alias :to_mobile :to_html
+end

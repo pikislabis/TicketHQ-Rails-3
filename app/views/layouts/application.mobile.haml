@@ -1,0 +1,32 @@
+%title TicketHQ
+
+=stylesheet_link_tag "mobile"
+=javascript_include_tag "mobile"
+%meta{:content => "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;", :name => "viewport"}
+:javascript
+	function clickclear(thisfield, defaulttext) {
+		if (thisfield.value == defaulttext) {
+			thisfield.value = "";
+		}
+	}
+
+	function clickrecall(thisfield, defaulttext) {
+		if (thisfield.value == "") {
+			thisfield.value = defaulttext;
+		}
+	}
+=yield(:head)
+.current
+	.toolbar
+		=yield(:button_back)
+		%h1=yield(:title)
+		=yield(:button_new_edit)
+		=yield(:toolbar)
+
+	-unless flash.empty?
+		.info
+			-flash.each do |name, msg|
+				=content_tag :div, msg, :id => "flash_#{name}"
+	=yield
+	.info
+		%p=link_to "Version Completa", :mobile => 0

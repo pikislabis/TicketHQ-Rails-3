@@ -8,7 +8,7 @@ class Admin::ProjectsController < AdminController
 	def new
 		@project = Project.new
 		3.times {@project.statuses.build}
-		#TODO: add_status_link
+		#TODO: add_status_link. Estados configurables
 	end
 
 	def create

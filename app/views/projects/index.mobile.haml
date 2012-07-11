@@ -1,0 +1,15 @@
+-content_for :title do
+	Proyectos
+
+-content_for :button_back do
+	=link_to "Salir", '/logout', :class => "back"
+		
+-content_for :button_new_edit do
+	=link_to "Buscar", "/search", :class => "button"
+
+%ul
+	-for project in @projects
+		%li.arrow
+			=link_to project.name, "/projects/#{project.id}"
+			%small.counter
+				= project.tickets.select{|p| !p.status.close}.size

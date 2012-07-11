@@ -1,0 +1,15 @@
+-content_for :title do
+	=@project.name
+
+-content_for :button_back do
+	=link_to "Atras", projects_path, :class => "back"
+
+-if Project.proyectos(current_user,"make").include? Project.find(params[:id])	
+	-content_for :button_new_edit do
+		=link_to "Nuevo", new_project_ticket_path(@project.id), :class => "button"
+
+%ul
+	-for ticket in @tickets.select{|p| !p.status.close}
+		%li.arrow
+			=link_to ticket.title, "/tickets/#{ticket.id}"
+=# will_paginate @tickets, :class => "will_paginate", :previous_label => "<", :next_label => ">"

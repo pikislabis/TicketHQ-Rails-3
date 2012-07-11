@@ -1,0 +1,41 @@
+-content_for :title do
+	Ticket nº	
+	=@ticket.id
+
+-content_for :button_back do
+	=link_to "Atras", :back, :class => "back"
+
+-if @edit	
+	=content_for :button_new_edit do
+		=link_to "Editar", edit_ticket_path(@ticket), :class => "button" unless current_page? "/tickets/new"
+
+%h2 Titulo
+%ul
+	%li= @ticket.title
+%h2 Creador
+%ul
+	%li= @ticket.user.name
+%h2 Descripcion
+%ul
+	%li= @ticket.description
+%h2 Proyecto
+%ul
+	%li= @ticket.project.name
+%h2 Estado
+%ul
+	%li= @ticket.status.name
+%h2 Prioridad
+%ul
+	%li= @ticket.priority	
+
+- if @edit
+	=#link_to_function 'Actualizar', visual_effect(:toggle_appear, "ticket_#{@ticket.id}", :duration => 0.5), :class => 'whiteButton'
+	.box{ :id => "ticket_#{h @ticket.id}", :style => "display: none;" }
+		=render :partial => 'add_record', :locals => {:ticket => @ticket, :users => @users}
+
+	
+%h2 Cambios
+%ul
+	-for record in @ticket.records
+		%li.arrow
+			=link_to record.text2, "/records/#{record.id}"
