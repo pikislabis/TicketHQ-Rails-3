@@ -293,6 +293,10 @@ input.submit:hover{
 	margin-right: 10px;
 }
 
+#content-body h4 {
+	margin-top: 15px;
+}
+
 .flashes {
 	/*font-weight:bold;*/
 	text-align:center;
@@ -446,6 +450,7 @@ td.clarita{
 	margin-right: 10px;
 	float: left;
 	height: 100%;
+	text-align: center;
 }
 
 hr{
@@ -515,12 +520,12 @@ table.record_options_2{
 }
 
 .title{
-	height: 8%;
+	height: 40px;
 }
 
 .title h2{
 	float: left;
-	width: 80%;
+	width: auto;
 }
 
 .title img{
@@ -529,7 +534,8 @@ table.record_options_2{
 }
 
 .title a{
-	float: left;
+	float: right;
+	padding-top: 15px;
 }
 
 div.label {

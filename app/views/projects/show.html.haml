@@ -3,8 +3,8 @@
 	-if current_user.project_subs.include?(@project) and observe_project?(current_user, @project)	
 		=image_tag("eye.png", :size => "30x30", :title => "Está observando el proyecto.")
 -if observe_project?(current_user,@project)
-	=link_to current_user.project_subs.include?(@project) ? 'Dejar de observar el proyecto' : 'Observar el proyecto', "observe_project/#{@project.id}"
-= " - " 
+	=link_to current_user.project_subs.include?(@project) ? 'Dejar de observar el proyecto' : 'Observar el proyecto', project_toogle_observe_path(@project)
+= " - "
 =#link_to_function "Mostrar/Ocultar Proyectos Cerrados", visual_effect(:toggle_appear, "closed", :duration => 0.5)	
 #tickets
 	%table.lista_recursos

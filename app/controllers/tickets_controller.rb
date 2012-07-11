@@ -134,6 +134,18 @@ class TicketsController < ApplicationController
 		#@tickets = @tickets.paginate(:page => params[:page], :per_page => 10)
 	end
   
+  def toogle_observe
+	  ticket = Ticket.find(params[:ticket_id])
+	  if current_user.ticket_subs.include?(ticket)
+	    current_user.ticket_subs.delete(ticket)
+	    flash[:notice] = "Se ha dejado de observar el ticket."
+	  else
+	    current_user.ticket_subs << ticket
+	    flash[:notice] = "Se esta observando el ticket."
+	  end
+	  redirect_to ticket_path(ticket)
+	end
+  
   def related_tickets
 	  @ticket = Ticket.find(params[:ticket_id])
 	  @projects = Project.proyectos(current_user,"view")
@@ -144,13 +156,36 @@ class TicketsController < ApplicationController
 		end
 		#TODO: cambiar search
 		@q = Ticket.search(params[:q])
-		@tickets = @q.result(:distinct => true)
+		@tickets = @q.result(:distinct => true) - [@ticket]
 		#TODO: paginate
 		#@tickets = @tickets.paginate(:page => params[:page], :per_page => 10)
 	end
   
   def toogle_closed_tickets
   end
+  
+  def mod_rel_tickets
+	  @ticket = Ticket.find(params[:ticket_id])
+	  @ticket_o = Ticket.find(params[:ticket_o_id])
+	  
+	  if params[:type] == 'add'
+	    ticket_rel = TicketRelationship.new
+	    ticket_rel.ticket = @ticket
+	    ticket_rel.ticket_o = @ticket_o
+	    ticket_rel.user_id = current_user.id
+	    ticket_rel.save  
+	  elsif params[:type] == 'del'
+	    ticket_rel_1 = TicketRelationship.find(:first, :conditions => {:ticket_id => params[:ticket_id], :ticket_o_id => params[:ticket_o_id]})
+	    ticket_rel_2 = TicketRelationship.find(:first, :conditions => {:ticket_id => params[:ticket_o_id], :ticket_o_id => params[:ticket_id]})
+	    
+	    ticket_rel_1.nil? ? '' : ticket_rel_1.delete
+	    ticket_rel_2.nil? ? '' : ticket_rel_2.delete
+
+	  end  
+	  
+	  redirect_to ticket_related_tickets_path(@ticket)
+	  
+	end
   
   private
     

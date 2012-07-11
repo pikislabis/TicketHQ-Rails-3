@@ -53,7 +53,7 @@
 						%td.ticket_prioridad= ticket.priority
 						%td.ticket_date= ticket.created_at.strftime("%d/%m/%Y")
 						-if @ticket.related_tickets.include? ticket
-							%td.ticket_action{:id => "rel_ticket_#{ticket.id}"}=#link_to_remote 'Eliminar', :url => {:controller => :tickets, :action => :mod_rel_tickets, :ticket_id => @ticket.id, :ticket_o_id => ticket.id, :type => 'del'}, :update => "rel_ticket_#{ticket.id}"
+							%td.ticket_action{:id => "rel_ticket_#{ticket.id}"}=link_to 'Eliminar', ticket_mod_rel_tickets_path(@ticket, :ticket_o_id => ticket.id, :type => 'del')
 						-else
-							%td.ticket_action{:id => "rel_ticket_#{ticket.id}"}=#link_to_remote 'Relacionar', :url => {:controller => :tickets, :action => :mod_rel_tickets, :ticket_id => @ticket.id, :ticket_o_id => ticket.id, :type => 'add'}, :update => "rel_ticket_#{ticket.id}"
+							%td.ticket_action{:id => "rel_ticket_#{ticket.id}"}=link_to 'Relacionar', ticket_mod_rel_tickets_path(@ticket, :ticket_o_id => ticket.id, :type => 'add')
 		=#will_paginate @tickets

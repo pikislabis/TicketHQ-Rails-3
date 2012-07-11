@@ -2,9 +2,12 @@ TicketHQ::Application.routes.draw do
   
   resources :tickets do
     get :related_tickets
+    get :toogle_observe
+    get :mod_rel_tickets
   end
   resources :records
   resources :projects do
+    get :toogle_observe
     resources :tickets
   end
   

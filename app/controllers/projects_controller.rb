@@ -1,14 +1,29 @@
+# -*- coding: utf-8 -*-
+
 class ProjectsController < ApplicationController
   
   before_filter :find_project, :only => [:show, :edit, :update, :destroy]
   
   def index
+    @projects = project_user
   end
   
   def show
 		#TODO: paginate
 		#@tickets = @project.tickets.paginate(:page => params[:page], :per_page => 10)
 		@tickets = @project.tickets
+	end
+  
+  def toogle_observe
+	  project = Project.find(params[:project_id])
+	  if current_user.project_subs.include?(project)
+	    current_user.project_subs.delete(project)
+	    flash[:notice] = "Se ha dejado de observar el proyecto."
+	  else
+	    current_user.project_subs << project
+	    flash[:notice] = "Se está observando el proyecto."
+	  end
+	  redirect_to project_path(project)
 	end
   
 	private

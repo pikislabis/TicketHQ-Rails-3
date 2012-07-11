@@ -1,9 +1,9 @@
 .title	
 	%h2= @ticket.title
+	-if observe_project?(current_user,@ticket.project)
+		=link_to current_user.ticket_subs.include?(@ticket) ? 'Dejar de observar el ticket' : 'Observar el ticket', ticket_toogle_observe_path(@ticket)
 	-if current_user.ticket_subs.include?(@ticket) and observe_project?(current_user,@ticket.project)
 		=image_tag("eye.png", :size => "30x30", :title => "Está observando el ticket.")
--if observe_project?(current_user,@ticket.project)
-	=link_to current_user.ticket_subs.include?(@ticket) ? 'Dejar de observar el ticket' : 'Observar el ticket', "observe_ticket/#{@ticket.id}"
 .resume_ticket
 	.info
 		%strong Estado:
@@ -23,8 +23,8 @@
 	%hr
 	.info_all
 		.info1
+			=image_tag @ticket.user.gravatar_url
 			%h3= @ticket.user.name
-			= image_tag @ticket.user.gravatar_url
 		.resume
 			%p= @ticket.description
 			.acciones.acciones_resume
@@ -36,7 +36,7 @@
 				%strong Etiquetas: 
 				=@ticket.labels.map{|x| x.name unless x.name.blank?}.compact.join(", ")
 
-%h3
+%h4
 	Tickets Relacionados
 	=' | '
 	=link_to 'Editar', ticket_related_tickets_path(@ticket)
@@ -45,7 +45,7 @@
 	-@tickets = @related_tickets
 	=render :partial => 'ticket_list', :locals => {:show_closed => true}
 		
-%h3 Cambios
+%h4 Cambios
 %table.lista_recursos
 	%thead
 		%tr
