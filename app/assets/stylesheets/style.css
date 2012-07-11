@@ -136,6 +136,10 @@ label{
 	padding-top: 0px;
 }
 
+.login .canvas a:link, .login .canvas a:visited {
+	color:black;
+}
+
 .canvas li{
 	margin-bottom: 6px;
 }
