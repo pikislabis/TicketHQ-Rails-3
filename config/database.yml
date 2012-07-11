@@ -6,9 +6,6 @@
 
 tickethq: &tickethq
   adapter: mysql
-  username: b43fda5635a0d1
-  password: cc16191e
-  host: us-cdbr-east.cleardb.com
 
 development:
   adapter: sqlite3
