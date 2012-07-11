@@ -1,0 +1,31 @@
+= form_for :record, :url => records_path, :html => {:multipart => true } do |f|
+	%h3 Comentario
+	=f.text_area :text1, :rows => 5
+	=f.hidden_field :ticket_id, options = {:value => @ticket.id}
+	%h3 Opciones
+	%table.record_options
+		%thead
+		%tbody
+			%tr
+				%th= label_tag 'Estado: '
+				%td= select :ticket, :status_id, Status.find(:all, :conditions => {:project_id => ticket.project_id}).map{|x| [x.name,x.id]}
+				%th= label_tag 'Prioridad: '
+				%td= select :ticket, :priority, @type_priorities
+			%tr
+				%th= label_tag 'Asignar a:'
+				%td= select :ticket, :assigned_to, [nil, ] + users.map {|u| [u.name, u.id]}
+				%th= label_tag 'Archivo: '
+				%td
+					#attaches
+						=render :partial => 'attach', :collection => @record.attaches
+					=# add_attach_link "Añadir archivo"
+			%tr
+				%th= label_tag 'Etiquetas:'
+				%td#labels{:colspan => 3}
+					%div=render :partial => 'label_edit', :collection => @ticket.labels[0..2]
+					%div=render :partial => 'label_edit', :collection => @ticket.labels[3..5]
+
+	%p
+		= submit_tag 'Actualizar', :class => "submit"
+		= " | "
+		= link_to "Cancelar", :back

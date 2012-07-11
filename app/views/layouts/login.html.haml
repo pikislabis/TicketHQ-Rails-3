@@ -1,0 +1,20 @@
+!!!
+%html
+	%head
+		=render :partial => 'layouts/top'
+	%body
+		.login
+			%h1 TicketHQ
+			.canvas
+				.flashes
+					-if flash[:error]
+						.flash_error
+							=flash[:error]
+					-if flash[:notice]
+						.flash_notice
+							=flash[:notice]
+					-if flash[:alert]
+						.flash_alert
+							=flash[:alert]
+				
+				=yield

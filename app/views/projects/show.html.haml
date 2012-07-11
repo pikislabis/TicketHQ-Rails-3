@@ -1,0 +1,31 @@
+.title
+	%h2= "Tickets de #{@project.name}"
+	-if current_user.project_subs.include?(@project) and observe_project?(current_user, @project)	
+		=image_tag("eye.png", :size => "30x30", :title => "Está observando el proyecto.")
+-if observe_project?(current_user,@project)
+	=link_to current_user.project_subs.include?(@project) ? 'Dejar de observar el proyecto' : 'Observar el proyecto', "observe_project/#{@project.id}"
+= " - " 
+=#link_to_function "Mostrar/Ocultar Proyectos Cerrados", visual_effect(:toggle_appear, "closed", :duration => 0.5)	
+#tickets
+	%table.lista_recursos
+		%thead
+			%tr
+				%th.ticket_id= "ID"
+				%th= "Resumen"
+				%th.ticket_estado= "Estado"
+				%th.ticket_prioridad= "Prioridad"
+				%th.ticket_date= "Fecha"
+		%tbody
+		-for ticket in @tickets
+			%tr{:id => "#{ticket.status.close ? 'closed' : 'opened' }", :style => "#{ticket.status.close ? 'display: none' : '' }"}
+				%td.ticket_id= "##{ticket.id}"
+				%td{:title => ticket.description}
+					.img_ticket
+						= image_tag ticket.user.gravatar_url(:size => 30)
+					.info_ticket
+						%h4{:class => "#{ticket.status.close ? 'closed' : 'opened' }"}= link_to ticket.title, ticket_path(ticket)
+						%span.user_ticket= ticket.user.name
+				%td= ticket.status.name
+				%td= ticket.priority
+				%td= ticket.created_at.strftime("%d/%m/%Y")
+	=# will_paginate @tickets

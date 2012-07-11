@@ -1,0 +1,27 @@
+#nav
+	%ul
+		%li.rounded= link_to 'Tickets', :controller => "/tickets", :action => 'index'
+		-if params[:controller] == 'projects' and !params[:id].blank? and Project.proyectos(current_user,"make").include? Project.find(params[:id])
+			%li.rounded= link_to 'Nuevo ticket', new_project_ticket_path(@project.id)			
+		-else
+			%li.rounded= link_to 'Nuevo ticket', new_ticket_path
+		%li.search
+			-form_tag tickets_path, :method => 'get' do
+				%p
+					=text_field_tag :search
+					=submit_tag "Buscar"
+		%li= link_to 'Busq avanzada', '/search'
+		-if user_signed_in? and current_user.admin?		
+			%li.rounded.right= link_to 'Admin', admin_panel_index_path
+		%li.rounded.right= link_to 'Proyectos', root_path
+
+.flashes
+	-if flash[:error]
+		.flash_error
+			=flash[:error]
+	-if flash[:notice]
+		.flash_notice
+			=flash[:notice]
+
+#content-body
+	=yield

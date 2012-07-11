@@ -1,0 +1,14 @@
+#header
+	-if current_user
+		%ul#user-bar-greeting
+			%li= link_to "Mi Cuenta", edit_user_registration_path, {:title => "Ir a Mi Cuenta"}
+			%li= link_to "Desconectar", '/logout', { :title => "Salir del sistema" }
+	-else
+		%ul#user-bar-greeting
+			%li No está conectado
+			%li
+				= link_to "Acceder",  login_path,  { :title => "Acceder" }
+				\/
+				\#{link_to "Registrarse", new_registration_path(resource_name), { :title => "Crear una cuenta" }}
+	-if current_user
+		%h1= link_to current_user.name, :controller => "/users", :action => "index"
