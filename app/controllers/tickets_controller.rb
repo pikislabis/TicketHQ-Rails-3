@@ -12,7 +12,7 @@ class TicketsController < ApplicationController
     end
     if @tickets.length == 0
       flash[:error] = "No hay tickets para los proyectos vinculados."
-      redirect_back_or_default('/')
+      redirect_to :back
     end
 
     #TODO: paginate
