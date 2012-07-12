@@ -1,5 +1,3 @@
-=# -*- coding: utf-8 -*-
-
 %h1 Proyectos
 %p= link_to "Nuevo proyecto", :controller => "admin/projects", :action => "new"
 %table.lista_recursos
@@ -20,4 +18,3 @@
 			%td.acciones
 				=link_to "Editar", edit_admin_project_path(project)
 				=link_to "Borrar", admin_project_path(project), opciones_borrado
-=# will_paginate @projects
