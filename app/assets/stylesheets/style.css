@@ -575,6 +575,10 @@ table#form_related{
 	font-size: 12px;
 }
 
+table#form_search td.date_select select {
+	width: auto;
+}
+
 .closed a{
 	text-decoration: line-through;
 	color: green;

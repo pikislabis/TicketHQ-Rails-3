@@ -15,18 +15,16 @@
 				%td
 					=f.label :project_id_eq, "Proyecto"
 					=f.collection_select :project_id_eq, @projects, :id, :name, :include_blank => true
-					=#observe_field :search_project_id, :url => { :action => :update_status_menu },
-		                  							:update => :status_field_div,
-		                  							:with => :project_id
+					=#observe_field :search_project_id, :url => { :action => :update_status_menu }, :update => :status_field_div, :with => :project_id
 				%td
 					#status_field_div
 						%label{:for => "status_id"} Estado
 						=f.collection_select :status_id_eq, @statuses, :id, :name, :include_blank => true
 			%tr
-				%td
+				%td.date_select
 					=f.label :created_at_gte, "Fecha"
-					=f.date_select :created_at_gteq, :include_blank => true 
-					= " - "
+					=f.date_select :created_at_gteq, :include_blank => true
+					= "  --  "
 					=f.date_select :created_at_lteq, :include_blank => true
 				%td
 					=f.label :status_close_eq, "Cerrado"
