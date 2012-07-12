@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 class AdminController < ApplicationController
   
 	before_filter :authorize_admin

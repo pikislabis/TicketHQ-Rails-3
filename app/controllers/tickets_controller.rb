@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 class TicketsController < ApplicationController
  
   before_filter :find_ticket, :only => [:show, :edit, :update, :destroy]
