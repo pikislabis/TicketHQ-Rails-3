@@ -15,7 +15,7 @@
 		=radio_button_tag "statuses", "default", true, options = {:onclick => "$('status_block').hide(); return true;"}
 		Por defecto
 		%br/
-		=radio_button_tag "statuses", "custom", false, options = {:onclick => "$('status_block').show(); return true;"}
+		=#radio_button_tag "statuses", "custom", false, options = {:onclick => "$('status_block').show(); return true;"}
 		Configurables
 	
 	#status_block{:style => "display:none;"}
