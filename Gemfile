@@ -52,7 +52,7 @@ end
 
 group :production do
 	gem 'ruby-mysql'
-	#gem 'mysql'
+	gem 'mysql'
 end
 
 group :test do
