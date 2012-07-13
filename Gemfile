@@ -51,7 +51,7 @@ group :development do
 end
 
 group :production do
-	gem 'mysql'
+	gem 'ruby-mysql'
 end
 
 group :test do
