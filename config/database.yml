@@ -6,6 +6,8 @@
 
 tickethq: &tickethq
   adapter: mysql
+  pool: 5
+  timeout: 8000
 
 development:
   adapter: sqlite3
