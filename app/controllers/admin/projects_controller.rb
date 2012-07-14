@@ -19,7 +19,7 @@ class Admin::ProjectsController < AdminController
 	    @type_state.length.times {@project.statuses.build}
 	    @project.statuses.each_with_index do |status, index|
 	      status.name = @type_state[index]
-				status.order = index + 1
+				status.position = index + 1
 	    end
 	  end
 		if @project && @project.valid?

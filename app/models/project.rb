@@ -1,7 +1,7 @@
 class Project < ActiveRecord::Base
   has_and_belongs_to_many :groups	
 	has_many :tickets, :dependent => :destroy
-	has_many :statuses, :order => 'statuses.order', :dependent => :destroy
+	has_many :statuses, :order => 'statuses.position', :dependent => :destroy
 	has_many :project_subscribes, :dependent => :destroy
 	has_many :user_subs, :through => :project_subscribes, :source => :user
 	
@@ -11,10 +11,10 @@ class Project < ActiveRecord::Base
   validates_length_of :info, :maximum => 50000, :allow_blank => true
 
   def status_attributes=(status_attributes)
-		order = 0
+		position = 0
     status_attributes.each do |attributes|
-			order += 1 
-			attributes.merge!({"order" => order})
+			position += 1 
+			attributes.merge!({"position" => position})
 			attributes["name"].blank? ? nil : statuses.build(attributes) 
     end
   end

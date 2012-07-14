@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120710215312) do
+ActiveRecord::Schema.define(:version => 20120714094744) do
 
   create_table "attaches", :force => true do |t|
     t.integer  "record_id"
@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(:version => 20120710215312) do
   create_table "statuses", :force => true do |t|
     t.string   "name"
     t.integer  "project_id"
-    t.integer  "order"
+    t.integer  "position"
     t.boolean  "close",      :default => false
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
@@ -126,6 +126,10 @@ ActiveRecord::Schema.define(:version => 20120710215312) do
     t.string   "name"
     t.boolean  "admin"
     t.boolean  "enabled"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

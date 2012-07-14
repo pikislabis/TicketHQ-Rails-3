@@ -4,8 +4,7 @@ class Record < ActiveRecord::Base
 	has_many :attaches, :dependent => :destroy
 	
 	def attach_attributes=(attach_attributes)
-		order = 0
-    attach_attributes.each do |attributes|
+		attach_attributes.each do |attributes|
 			attributes["file"].blank? ? nil : attaches.build(attributes) 
     end
   end
