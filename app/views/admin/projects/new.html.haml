@@ -2,7 +2,7 @@
 = form_for :project, :url => admin_projects_path do |f|
 	%p
 		= label_tag 'Nombre'
-		= image_tag "square.gif", :class => 'help', :title => "Entre 3 y 15 caracteres"
+		= image_tag "square.gif", :class => 'help', :title => "Entre 3 y 30 caracteres"
 		%br/
 		= f.text_field :name		
 	%p

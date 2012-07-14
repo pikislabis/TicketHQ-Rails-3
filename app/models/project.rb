@@ -6,7 +6,7 @@ class Project < ActiveRecord::Base
 	has_many :user_subs, :through => :project_subscribes, :source => :user
 	
 	validates_presence_of :name
-	validates_length_of :name, :in => 3..15
+	validates_length_of :name, :in => 3..30
   validates_uniqueness_of :name, :case_sensitive => false
   validates_length_of :info, :maximum => 50000, :allow_blank => true
 
