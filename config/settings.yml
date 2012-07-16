@@ -1,0 +1,12 @@
+development: &non_production_settings
+  site_url: http://localhost:3000
+  site_name: TicketHQ
+  admin_email: tickethq.rails@gmail.com
+  
+test:
+  <<: *non_production_settings
+  
+production:
+    site_url: http://tickethq.herokuapp.com
+    site_name: TicketHQ
+    admin_email: tickethq.rails@gmail.com

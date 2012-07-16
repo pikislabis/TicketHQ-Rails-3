@@ -12,6 +12,22 @@ class Ticket < ActiveRecord::Base
   
   validates_presence_of :project_id
   
+  after_create do |ticket|
+    ticket.project.user_subs.each do |user|
+			if observe_project?(user, ticket.project)
+      	ProjectMailer.ticket_create(user, ticket).deliver
+			end
+    end
+  end
+  
+  after_update do |ticket|
+    ticket.user_subs.each do |user|
+			if observe_project?(user, ticket.project)
+      	TicketMailer.ticket_change(user, ticket).deliver
+			end
+    end
+  end
+  
   def label_attributes=(label_attributes)
     label_attributes.each do |attributes|
       labels.build(attributes)
@@ -34,6 +50,17 @@ class Ticket < ActiveRecord::Base
 		users.flatten!
 		users.uniq!
 		users
+	end
+	
+	protected
+	
+	def observe_project?(user, project)
+		observe = false
+		groups = user.groups & project.groups
+		groups.each do |x|
+			x.observe ? (observe = true; break) : nil
+		end
+		observe
 	end
 
 end

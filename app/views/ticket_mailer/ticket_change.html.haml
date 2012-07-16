@@ -1,0 +1,21 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body
+		%p
+		  #{h @user.name}, se ha modificado un ticket del proyecto #{h Project.find(@ticket.project_id).name} que está siguiendo.
+		%p
+		%ul
+		  %li
+		    Ticket: #{h @ticket.title}
+		  %li
+		    Descripción: #{h @ticket.description}
+		  %li
+		    Estado: #{h @ticket.status.name}
+		  %li
+		    Prioridad: #{h @ticket.priority}
+		  %li
+		    Asignado a: #{h @ticket.assigned_to.nil? ? nil : User.find(@ticket.assigned_to).name}
+		%p
+		  Puede visitar el ticket en la siguiente dirección: #{h @url}

@@ -1,0 +1,15 @@
+!!!
+%html
+	%head
+		%meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+	%body
+		%p
+			El correo que ha enviado para dar de alta una incidencia es incorrecto.
+		%p
+			El formato del asunto debe ser %br
+			[proyecto_id] Título del ticket
+		%p
+			Los proyectos en los que puede dar de alta tickets son: %br
+			- @projects.each do |project|
+				#{h project.id} - #{h project.name} %br
+			
