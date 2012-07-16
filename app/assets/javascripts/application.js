@@ -13,3 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+$('div.flashes').live('click', function(e) {
+  $(this).fadeOut();
+});

@@ -300,6 +300,7 @@ input.submit:hover{
 .flashes {
 	/*font-weight:bold;*/
 	text-align:center;
+	cursor: pointer;
 }
 
 .flash_notice, .flash_error{
