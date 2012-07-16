@@ -18,7 +18,8 @@ class Admin::ProjectsController < AdminController
 		if params[:statuses] == "default"
 	    @type_state.length.times {@project.statuses.build}
 	    @project.statuses.each_with_index do |status, index|
-	      status.name = @type_state[index]
+	      status.name = @type_state[index][0]
+	      status.close = @type_state[index][1]
 				status.position = index + 1
 	    end
 	  end

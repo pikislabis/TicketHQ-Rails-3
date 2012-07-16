@@ -37,7 +37,7 @@ class ApplicationController < ActionController::Base
   private
   
     def values
-  		@type_state = ["Nuevo", "Abierto", "Resuelto", "Reasignado"]
+  		@type_state = [["Nuevo", false], ["Abierto", false], ["Resuelto", true], ["Reasignado", false]]
   		@type_priorities = ["Baja", "Media", "Alta"]
   		@type_origin = ["Manual", "e-mail"]
   	end
