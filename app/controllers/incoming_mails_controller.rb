@@ -20,7 +20,7 @@ class IncomingMailsController < ApplicationController
                                                                     TicketMailer.deliver(mail); 
                                                                     return)
     
-    ticket = Ticket.create(:title => title, :description => @description.to_s, :user => user,
+    ticket = Ticket.create(:title => title, :description => message.body.decoded, :user => user,
                             :status => Project.find(project_id).statuses.first, :priority => "Media", 
                             :project => project)
                             
