@@ -27,7 +27,29 @@ class IncomingMailsController < ApplicationController
                                                                     render :text => 'success', :status => 200;
                                                                     return)
     
-    ticket = Ticket.create(:title => title, :description => message.text_part.body.decoded, :user => user,
+    if message.multipart?
+      message.parts.each do |part|
+    		header = part.content_type.to_s
+    		if header.include? "multipart/alternative"
+    		  part.parts.each do |part2|
+    				header2 = part2.content_type.to_s
+    				if header2.include? "text/plain"
+    				  part2.set_disposition("inline")
+    					description = part2.body.decoded
+    					break
+    				end
+    			end
+    		elsif header.include? "text/plain"
+    		  part.set_disposition("inline")
+    			description = part.body.decoded
+    			break
+    		end
+    	end
+    else
+    	description = email.body.decoded
+    end
+    
+    ticket = Ticket.create(:title => title, :description => description, :user => user,
                             :status => Project.find(project_id).statuses.first, :priority => "Media", 
                             :project => project)
                             
