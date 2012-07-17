@@ -34,14 +34,12 @@ class IncomingMailsController < ApplicationController
     		  part.parts.each do |part2|
     				header2 = part2.content_type.to_s
     				if header2.include? "text/plain"
-    				  part2.set_disposition("inline")
-    					description = part2.body.decoded
+    				  description = part2.body.decoded
     					break
     				end
     			end
     		elsif header.include? "text/plain"
-    		  part.set_disposition("inline")
-    			description = part.body.decoded
+    		  description = part.body.decoded
     			break
     		end
     	end
