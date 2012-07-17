@@ -5,6 +5,10 @@ class IncomingMailsController < ApplicationController
   def create
     message = Mail.new(params[:message])
     
+    Rails.logger.log "---------------------------------------------------"
+    Rails.logger.log message.subject
+    Rails.logger.log "---------------------------------------------------"
+    
     user = User.find_by_email(message.from) or return
     project_id, title = message.subject.scan(/\[(\d)\]\s([\w|\s]*)/).first
     
