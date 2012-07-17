@@ -33,5 +33,8 @@ class Admin::ProjectsController < AdminController
 			render :action => 'new'
 		end
 	end
+	
+	def new_status
+  end
 
 end

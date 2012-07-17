@@ -17,3 +17,16 @@
 $('div.flashes').live('click', function(e) {
   $(this).fadeOut();
 });
+
+$('#statuses_default').live('click', function (){
+	$('#status_block').hide();
+});
+
+$('#statuses_custom').live('click', function (){
+	$('#status_block').show();
+});
+
+$('.remove_status').live('click', function(e){
+  e.preventDefault();
+  $(this).parents('.status').remove();
+});

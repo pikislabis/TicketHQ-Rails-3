@@ -34,7 +34,12 @@ TicketHQ::Application.routes.draw do
   # 'admin', :controller => 'admin/panel'
   # Sample resource route within a namespace:
   namespace :admin do
-		resources :projects, :groups, :users, :panel
+		resources :projects do
+		  collection do
+		    get :new_status
+		  end
+		end   
+		resources :groups, :users, :panel
 	end
 
   root :to => "projects#index"

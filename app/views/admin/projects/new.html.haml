@@ -12,17 +12,17 @@
 	%p
 		=label_tag 'Estados'
 		%br/
-		=radio_button_tag "statuses", "default", true, options = {:onclick => "$('status_block').hide(); return true;"}
+		=radio_button_tag "statuses", "default", true
 		Por defecto
 		%br/
-		=#radio_button_tag "statuses", "custom", false, options = {:onclick => "$('status_block').show(); return true;"}
+		=radio_button_tag "statuses", "custom", false
 		Configurables
 	
 	#status_block{:style => "display:none;"}
 		#statuses
 			Marque los estados finales
 			=render :partial => 'status', :collection => @project.statuses
-		=#add_status_link "Añadir estado"
+		=link_to "Añadir estado", new_status_admin_projects_path, :remote => true
 
 	%p
 		= submit_tag 'Crear', :class => 'submit'
