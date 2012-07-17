@@ -4,13 +4,11 @@ class IncomingMailsController < ApplicationController
   
   def create
     message = Mail.new(params[:message])
-    
-    Rails.logger.log message.subject
 
     user = User.find_by_email(message.from)
     
     if user.nil?
-      render :text => 'success', :status => 200
+      render :text => 'error', :status => 404
       return
     end
     
