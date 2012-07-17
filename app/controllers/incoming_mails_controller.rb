@@ -27,7 +27,7 @@ class IncomingMailsController < ApplicationController
                                                                     render :text => 'success', :status => 200;
                                                                     return)
     
-    ticket = Ticket.create(:title => title, :description => message.body.decoded, :user => user,
+    ticket = Ticket.create(:title => title, :description => message.text_part.body.decoded, :user => user,
                             :status => Project.find(project_id).statuses.first, :priority => "Media", 
                             :project => project)
                             
