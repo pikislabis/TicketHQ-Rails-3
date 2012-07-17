@@ -1,3 +1,3 @@
 %h1 Tickets asignados
-=link_to "Mostrar/Ocultar Tickets Cerrados", toogle_closed_tickets_path, :remote => true
+=link_to "Mostrar/Ocultar Tickets Cerrados", "#", :class => 'toggle_closed_tickets'
 =render :partial => 'tickets/assigned', :locals => {:tickets => @tickets_assigned.to_a}

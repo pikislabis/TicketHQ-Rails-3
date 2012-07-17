@@ -127,7 +127,7 @@ class TicketsController < ApplicationController
 		@users = @projects.map{|p| p.users}.flatten.uniq
 		if params[:q].nil?
 		  @statuses = Array.new
-		  params[:q] = {:project_id_in => @projects.map(&:id)} 
+		  params[:q] = {:project_id_in => @projects.map(&:id), :status_close_eq => false} 
 		else
 		  params[:q][:project_id_in] = @projects.map(&:id) unless !params[:q][:project_id_eq].blank?
 		  @statuses = params[:q][:project_id_eq].blank? ? Array.new : Project.find(params[:q][:project_id]).statuses
@@ -138,7 +138,7 @@ class TicketsController < ApplicationController
 		#@tickets = @tickets.paginate(:page => params[:page], :per_page => 10)
 	end
   
-  def toogle_observe
+  def toggle_observe
 	  ticket = Ticket.find(params[:ticket_id])
 	  if current_user.ticket_subs.include?(ticket)
 	    current_user.ticket_subs.delete(ticket)
@@ -164,9 +164,6 @@ class TicketsController < ApplicationController
 		#TODO: paginate
 		#@tickets = @tickets.paginate(:page => params[:page], :per_page => 10)
 	end
-  
-  def toogle_closed_tickets
-  end
   
   def mod_rel_tickets
 	  @ticket = Ticket.find(params[:ticket_id])

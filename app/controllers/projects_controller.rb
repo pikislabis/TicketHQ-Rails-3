@@ -14,7 +14,7 @@ class ProjectsController < ApplicationController
 		@tickets = @project.tickets
 	end
   
-  def toogle_observe
+  def toggle_observe
 	  project = Project.find(params[:project_id])
 	  if current_user.project_subs.include?(project)
 	    current_user.project_subs.delete(project)

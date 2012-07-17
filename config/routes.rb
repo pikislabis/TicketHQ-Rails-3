@@ -2,20 +2,18 @@ TicketHQ::Application.routes.draw do
   
   resources :tickets do
     get :related_tickets
-    get :toogle_observe
+    get :toggle_observe
     get :mod_rel_tickets
   end
   resources :records
   resources :projects do
-    get :toogle_observe
+    get :toggle_observe
     resources :tickets
   end
   
   match '/incoming_mails' => 'incoming_mails#create'
   
   match '/search' => 'tickets#advanced_search', :as => 'search'
-  
-  get '/toogle_closed_tickets' => 'tickets#toogle_closed_tickets', :as => "toogle_closed_tickets"
 
   devise_for :users, :path_names => { :sign_in => 'login', 
     :sign_out => 'logout', 

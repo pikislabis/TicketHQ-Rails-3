@@ -11,7 +11,7 @@
 					%th.ticket_prioridad= "Prioridad"
 			%tbody
 			-for ticket in @tickets_assigned
-				%tr{:id => "#{ticket.status.close ? 'closed' : 'opened' }"}
+				%tr{:class => "#{ticket.status.close ? 'closed' : 'opened' }", :style => "display: #{ticket.status.close ? 'none' : 'block'};"}
 					%td.ticket_id= "##{ticket.id}"
 					%td{:title => ticket.description}
 						.img_ticket

@@ -1,7 +1,7 @@
 .title	
 	%h2= @ticket.title
 	-if observe_project?(current_user,@ticket.project)
-		=link_to current_user.ticket_subs.include?(@ticket) ? 'Dejar de observar el ticket' : 'Observar el ticket', ticket_toogle_observe_path(@ticket)
+		=link_to current_user.ticket_subs.include?(@ticket) ? 'Dejar de observar el ticket' : 'Observar el ticket', ticket_toggle_observe_path(@ticket)
 	-if current_user.ticket_subs.include?(@ticket) and observe_project?(current_user,@ticket.project)
 		=image_tag("eye.png", :size => "30x30", :title => "Está observando el ticket.")
 .resume_ticket

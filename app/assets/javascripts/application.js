@@ -30,3 +30,8 @@ $('.remove_status').live('click', function(e){
   e.preventDefault();
   $(this).parents('.status').remove();
 });
+
+$('.toggle_closed_tickets').live('click', function(e){
+	e.preventDefault();
+	$('tr.closed').toggle();
+});
