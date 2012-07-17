@@ -127,8 +127,10 @@ class TicketsController < ApplicationController
 		@users = @projects.map{|p| p.users}.flatten.uniq
 		if params[:q].nil?
 		  @statuses = Array.new
+		  params[:q] = {:project_id_in => @projects.map(&:id)} 
 		else
-		  @statuses = params[:q][:project_id].blank? ? Array.new : Project.find(params[:q][:project_id]).statuses
+		  params[:q][:project_id_in] = @projects.map(&:id) unless !params[:q][:project_id_eq].blank?
+		  @statuses = params[:q][:project_id_eq].blank? ? Array.new : Project.find(params[:q][:project_id]).statuses
 		end
 		@q = Ticket.search(params[:q])
 		@tickets = @q.result(:distinct => true)
