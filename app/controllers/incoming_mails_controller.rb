@@ -1,6 +1,6 @@
 class IncomingMailsController < ApplicationController
   require 'mail'
-  skip_before_filter :require_no_authentication
+  skip_before_filter :authenticate_user!, :user_setup
   
   def create
     message = Mail.new(params[:message])
