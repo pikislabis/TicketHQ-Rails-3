@@ -12,7 +12,7 @@ class IncomingMailsController < ApplicationController
       return
     end
     
-    project_id, title = message.subject.scan(/\[(\d)\]\s([\w|\s]*)/).first
+    project_id, title = params[:subject].scan(/\[(\d*)\]\s+([\w|\s]*)/).first
     
     begin
       project = Project.find(project_id)
