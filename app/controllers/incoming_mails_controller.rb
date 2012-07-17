@@ -11,13 +11,12 @@ class IncomingMailsController < ApplicationController
     begin
       project = Project.find(project_id)
     rescue ActiveRecord::RecordNotFound
-      wrong_mail(user)
+      TicketMailer.wrong_mail(user).deliver
       return
     end
     
     user.groups.map{|x| 
-      x.projects unless !x.make}.flatten.include?(project) ? nil : (mail = TicketMailer.wrong_mail(user); 
-                                                                    TicketMailer.deliver(mail); 
+      x.projects unless !x.make}.flatten.include?(project) ? nil : (TicketMailer.wrong_mail(user).deliver; 
                                                                     return)
     
     ticket = Ticket.create(:title => title, :description => message.body.decoded, :user => user,
