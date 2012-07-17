@@ -51,6 +51,13 @@ class TicketMailer < ActionMailer::Base
 		end
   end
   
+  def ticket_change(user, ticket)
+    @ticket = ticket
+    @user = user
+    @url  = "#{APP_CONFIG[:site_url]}/tickets/#{ticket.id}"
+    mail(:to => user.email, :subject => "[#{APP_CONFIG[:site_name]}] Cambios en un ticket")
+  end
+  
   def wrong_mail(user)
     @projects = user.groups.map{|x| x.projects unless !x.make}.flatten.uniq.delete_if{|y| y.nil?}
     mail(:to => user.email, :subject => "[#{APP_CONFIG[:site_name]}] Error en mail")

@@ -9,6 +9,8 @@ class Ticket < ActiveRecord::Base
   has_many :direct_tickets, :through => :ticketRelationships, :source => :ticket_o
   has_many :inverse_ticketRelationships, :class_name => "TicketRelationship", :foreign_key => "ticket_o_id"
   has_many :inverse_tickets, :through => :inverse_ticketRelationships, :source => :ticket
+  has_many :ticket_subscribes
+	has_many :user_subs, :through => :ticket_subscribes, :source => :user
   
   validates_presence_of :project_id
   
