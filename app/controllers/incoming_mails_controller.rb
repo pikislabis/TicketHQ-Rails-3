@@ -12,11 +12,13 @@ class IncomingMailsController < ApplicationController
       project = Project.find(project_id)
     rescue ActiveRecord::RecordNotFound
       TicketMailer.wrong_mail(user).deliver
+      render :text => 'success', :status => 200
       return
     end
     
     user.groups.map{|x| 
-      x.projects unless !x.make}.flatten.include?(project) ? nil : (TicketMailer.wrong_mail(user).deliver; 
+      x.projects unless !x.make}.flatten.include?(project) ? nil : (TicketMailer.wrong_mail(user).deliver;
+                                                                    render :text => 'success', :status => 200;
                                                                     return)
     
     ticket = Ticket.create(:title => title, :description => message.body.decoded, :user => user,
@@ -29,10 +31,6 @@ class IncomingMailsController < ApplicationController
        record.attaches.create(:file => attach)
      end
     end
-    
-    Rails.logger.log message.subject #print the subject to the logs
-    Rails.logger.log message.body.decoded #print the decoded body to the logs
-    Rails.logger.log message.attachments.first.inspect #inspect the first attachment
 
     # Do some other stuff with the mail message
 
