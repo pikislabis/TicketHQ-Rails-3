@@ -11,6 +11,8 @@ TicketHQ::Application.routes.draw do
     resources :tickets
   end
   
+  match '/incoming_mails' => 'incoming_mails#create'
+  
   match '/search' => 'tickets#advanced_search', :as => 'search'
   
   get '/toogle_closed_tickets' => 'tickets#toogle_closed_tickets', :as => "toogle_closed_tickets"
