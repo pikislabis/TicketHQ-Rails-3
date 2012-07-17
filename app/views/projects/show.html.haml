@@ -5,7 +5,7 @@
 -if observe_project?(current_user,@project)
 	=link_to current_user.project_subs.include?(@project) ? 'Dejar de observar el proyecto' : 'Observar el proyecto', project_toggle_observe_path(@project)
 = " - "
-=#link_to_function "Mostrar/Ocultar Proyectos Cerrados", visual_effect(:toggle_appear, "closed", :duration => 0.5)	
+=link_to "Mostrar/Ocultar Tickets Cerrados", "#", :class => 'toggle_closed_tickets'
 #tickets
 	%table.lista_recursos
 		%thead
@@ -17,7 +17,7 @@
 				%th.ticket_date= "Fecha"
 		%tbody
 		-for ticket in @tickets
-			%tr{:id => "#{ticket.status.close ? 'closed' : 'opened' }", :style => "#{ticket.status.close ? 'display: none' : '' }"}
+			%tr{:class => "#{ticket.status.close ? 'closed' : 'opened' }", :style => "display: #{ticket.status.close ? 'none' : ''};"}
 				%td.ticket_id= "##{ticket.id}"
 				%td{:title => ticket.description}
 					.img_ticket

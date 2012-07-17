@@ -12,7 +12,7 @@
 				%th.ticket_date= "Fecha"
 		%tbody
 			-for ticket in @tickets
-				%tr{:id => "#{ticket.status.close ? 'closed' : 'opened' }", :style => "#{show_closed ? '' : ticket.status.close ? 'display: none' : ''}"}	
+				%tr{:class => "#{ticket.status.close ? 'closed' : 'opened' }", :style => "display: #{ticket.status.close ? 'none' : ''};"}	
 					%td.ticket_id= "##{ticket.id}"
 					%td{:title => ticket.description}
 						.img_ticket

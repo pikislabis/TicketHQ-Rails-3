@@ -26,7 +26,7 @@
 -if @tickets.blank?
 	No se han obtenido ningún ticket en la búsqueda.
 -else
-	=#link_to_function "Mostrar/Ocultar Tickets Cerrados", visual_effect(:toggle_appear, "closed", :duration => 0.5), :class => 'show_hide_tickets'
+	=link_to "Mostrar/Ocultar Tickets Cerrados", "#", :class => 'toggle_closed_tickets'
 	#tickets
 		%table.lista_recursos
 			%thead
@@ -40,7 +40,7 @@
 					%th.ticket_action="Acción"
 			%tbody
 				-for ticket in @tickets
-					%tr{:id => "#{ticket.status.close ? 'closed' : 'opened' }", :style => "#{ticket.status.close ? 'display: none' : ''}"}	
+					%tr{:class => "#{ticket.status.close ? 'closed' : 'opened' }", :style => "#{ticket.status.close ? 'display: none' : ''}"}	
 						%td.ticket_id= "##{ticket.id}"
 						%td{:title => ticket.description}
 							.img_ticket
