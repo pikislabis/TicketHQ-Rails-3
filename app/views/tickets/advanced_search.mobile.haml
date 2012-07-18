@@ -4,25 +4,22 @@
 -content_for :button_back do
 	=link_to "Atras", projects_path, :class => "back"
 	
--form_tag "/search", :name => 'search', :class => "form" do
+=form_tag "/search", :name => 'q', :class => "form" do
 
 	%ul
-		%li.edit.rounded=text_field_tag "search[title_or_description_like_all]", nil, :placeholder => 'Título o descripción'
+		%li.edit.rounded=text_field_tag "q[title_or_description_cont]", nil, :placeholder => 'Título o descripción'
 
 	%h2 Creador
 	%ul
-		%li=collection_select :search, :user_id, @users, :id, :name, :include_blank => true
+		%li=collection_select :q, :user_id_eq, @users, :id, :name, :include_blank => true
 
 	%h2 Proyecto
 	%ul
-		%li=collection_select :search, :project_id, @projects, :id, :name, :include_blank => true
-		=observe_field :search_project_id, :url => { :action => :update_status_menu },
-              							:update => :status_field_div,
-              							:with => :project_id
+		%li=collection_select :q, :project_id_eq, @projects, :id, :name, :include_blank => true
 
 	%h2 Estado
 	%ul#status_field_div
-		%li=collection_select :search, :status_id, @statuses, :id, :name, :include_blank => true
+		%li=render :partial => 'statuses', :locals => {:statuses => @statuses}
 
 	%h2 Fecha desde
 
@@ -31,9 +28,9 @@
 	%ul.rounded
 		%li	
 			Cerrado
-			%span.toggle=check_box_tag "search[status_close_is]"
+			%span.toggle=check_box_tag "q[status_close_eq]"
 			
-	=link_to "Buscar", "#", :onclick => "document.search.submit();", :class => "whiteButton submit"
+	=link_to "Buscar", "#", :onclick => "document.q.submit();", :class => "whiteButton submit"
 	
 	#tickets
 		= render :partial => 'ticket_list', :locals => {:show_closed => true}

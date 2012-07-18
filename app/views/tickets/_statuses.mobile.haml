@@ -1,0 +1,2 @@
+=fields_for "q", nil do |status_form|
+	=status_form.collection_select :status_id_eq, statuses, :id, :name, :include_blank => true

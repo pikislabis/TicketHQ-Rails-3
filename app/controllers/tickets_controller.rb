@@ -131,6 +131,7 @@ class TicketsController < ApplicationController
 		else
 		  params[:q][:project_id_in] = @projects.map(&:id) unless !params[:q][:project_id_eq].blank?
 		  @statuses = params[:q][:project_id_eq].blank? ? Array.new : Project.find(params[:q][:project_id_eq]).statuses
+		  params[:q][:status_close_eq] = false unless params[:q][:status_close_eq]
 		end
 		@q = Ticket.search(params[:q])
 		@tickets = @q.result(:distinct => true)
@@ -195,7 +196,10 @@ class TicketsController < ApplicationController
 	  else
 	    @statuses = Array.new
     end
-    respond_to :js
+    respond_to do |format|
+      format.js
+      format.mobile { render :layout => false  }
+    end
   end
   
   private

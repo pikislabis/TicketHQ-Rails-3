@@ -1,5 +1,4 @@
 %ul
 	-for ticket in @tickets
-		%li.arrow
+		%li.arrow{:style => "display: #{ticket.status.close and !show_closed ? 'none' : ''};"}
 			=link_to ticket.title, ticket_path(ticket.id)
-= will_paginate @tickets, :class => "will_paginate", :previous_label => "<", :next_label => ">"
