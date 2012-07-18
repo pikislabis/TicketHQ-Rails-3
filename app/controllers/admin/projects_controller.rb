@@ -28,8 +28,10 @@ class Admin::ProjectsController < AdminController
 			flash[:notice] = "El proyecto se ha creado de forma satisfactoria."
 			redirect_to admin_projects_path
 		else
-			flash[:error] = "Ha habido un error al crear el proyecto."
-			@project.errors.each {|x| flash[:error] += "<br/> - El campo <b>#{x[0]}</b> #{x[1]}"}
+			flash[:error] = "Ha habido un error al crear el proyecto. "
+			@project.errors.each do |key, value|
+			  flash[:error] += "#{key.to_s.capitalize}: #{value.to_s}. "
+			end
 			render :action => 'new'
 		end
 	end

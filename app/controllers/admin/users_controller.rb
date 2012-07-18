@@ -38,7 +38,6 @@ class Admin::UsersController < AdminController
 			redirect_to admin_users_path
 		else
 			flash[:error] = "Ha habido un error al actualizar el usuario. #{@user.errors.inspect}"
-			#@user.errors.each {|x| flash[:error] += "<br/> - El campo <b>#{x[0]}</b> #{x[1]}"}
 			render :action => 'edit'
 		end
 	end
@@ -54,6 +53,6 @@ class Admin::UsersController < AdminController
 		else
 			flash[:error] = "Ha ocurrido un error al eliminar el usuario."
 		end
-		redirect_to("admin/groups")
+		redirect_to admin_users_path
 	end
 end
