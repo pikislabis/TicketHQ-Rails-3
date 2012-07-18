@@ -4,3 +4,13 @@
 
 -content_for :button_back do
 	=link_to "Atras", :back, :class => "back"
+	
+=form_for :ticket, :url => ticket_path, :html => { :method => :put, :class => "form", :name => "edit_ticket"} do |f|
+	%h2 Titulo
+	%ul
+		%li=f.text_field :title
+	%h2 Descripción
+	%ul
+		%li=f.text_area :description
+	
+	=link_to "Actualizar", "#", :onclick => "document.edit_ticket.submit();", :class => "whiteButton submit"

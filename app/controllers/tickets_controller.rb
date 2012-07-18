@@ -115,6 +115,23 @@ class TicketsController < ApplicationController
 		
   end
  
+  def edit
+  end
+  
+  def update
+    if (current_user.id != @ticket.user_id and !current_user.admin?)
+      flash[:error] = 'No tiene privilegios para editar el ticket.'
+      redirect_to :back
+    end
+    if @ticket.update_attributes(params[:ticket])
+	    flash[:notice] = 'El ticket ha sido editado correctamente.'
+      redirect_to(@ticket)
+    else
+      flash[:error] = 'Ha habido un error al editar el ticket.'
+      redirect_to(@ticket)
+    end
+  end
+ 
   # Realizamos la consulta según los datos introducidos. Para el titulo/descripción tendremos en cuenta cada palabra
   # introducida por separado, priorizando aquellos tickets en los que se encuentren todas las palabras introducidas.
 	def advanced_search

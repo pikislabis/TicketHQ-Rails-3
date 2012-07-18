@@ -8,7 +8,7 @@
 -content_for :button_back do
 	=link_to "Atras", :back, :class => "back"
 
-- form_tag tickets_path, :name => 'new_ticket', :class => "form" do
+=form_tag tickets_path, :name => 'new_ticket', :class => "form" do
 	%h2 Titulo
 	%ul
 		%li=text_field_tag 'ticket[title]', @ticket.title
