@@ -4,6 +4,9 @@ TicketHQ::Application.routes.draw do
     get :related_tickets
     get :toggle_observe
     get :mod_rel_tickets
+    collection do
+      get :dynamic_statuses
+    end
   end
   resources :records
   resources :projects do

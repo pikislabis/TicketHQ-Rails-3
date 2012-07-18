@@ -130,7 +130,7 @@ class TicketsController < ApplicationController
 		  params[:q] = {:project_id_in => @projects.map(&:id), :status_close_eq => false} 
 		else
 		  params[:q][:project_id_in] = @projects.map(&:id) unless !params[:q][:project_id_eq].blank?
-		  @statuses = params[:q][:project_id_eq].blank? ? Array.new : Project.find(params[:q][:project_id]).statuses
+		  @statuses = params[:q][:project_id_eq].blank? ? Array.new : Project.find(params[:q][:project_id_eq]).statuses
 		end
 		@q = Ticket.search(params[:q])
 		@tickets = @q.result(:distinct => true)
@@ -187,6 +187,16 @@ class TicketsController < ApplicationController
 	  redirect_to ticket_related_tickets_path(@ticket)
 	  
 	end
+	
+	def dynamic_statuses
+	  if !params[:project_id].blank?
+	    @project = Project.find(params[:project_id])
+	    @statuses = @project.statuses
+	  else
+	    @statuses = Array.new
+    end
+    respond_to :js
+  end
   
   private
     

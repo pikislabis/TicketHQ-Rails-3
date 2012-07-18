@@ -35,3 +35,14 @@ $('.toggle_closed_tickets').live('click', function(e){
 	e.preventDefault();
 	$('tr.closed').toggle();
 });
+
+$('select#q_project_id_eq').live('change', function(e){
+	project_id = $(this).val();
+	$.ajax({
+    url: "/tickets/dynamic_statuses",
+    data: {project_id: project_id},
+		success: function(data){
+    	$("#q_status_id_eq").replaceWith(data);
+    }
+  });
+});
