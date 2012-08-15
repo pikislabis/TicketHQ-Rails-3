@@ -602,3 +602,22 @@ table#form_search td.date_select select {
 .show_hide_tickets{
 	float: right;
 }
+
+#tagCloud {   
+  width: 290px; 
+  text-align: center; 
+  padding: 5px;  
+  overflow: auto; 
+}  
+
+ul#tagList { 
+	margin: 0; 
+	padding: 0; 
+}
+
+ul#tagList li {  
+  list-style-type: none; 
+  float: left; 
+  margin: 0 10px; 
+  height: 35px;  
+}

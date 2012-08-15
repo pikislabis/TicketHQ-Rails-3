@@ -5,7 +5,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   
   before_filter :authenticate_user!, :user_setup, :values, :prepare_for_mobile
-  
+  before_filter :labels_cloud
+
   protected
   
     def user_setup
@@ -32,7 +33,14 @@ class ApplicationController < ActionController::Base
     def prepare_for_mobile
       session[:mobile_param] = params[:mobile] if params[:mobile]
     	request.format  = :mobile if mobile_device?
-    end  
+    end
+
+    def labels_cloud
+      if current_user
+        tickets = Project.proyectos(current_user, "view").map(&:tickets).flatten
+        @labels = Label.all.select{|l| tickets.include? l.ticket and !l.name.blank?}.map(&:name).inject(Hash.new(0)){|total, name| total[name] += 1; total}
+      end
+    end
   
   private
   
