@@ -8,11 +8,11 @@
 
 		%ul	
 			-@new_tickets.each do |ticket|
-				%li=link_to ticket.title, ticket_path(ticket)
+				%li=link_to ticket.title, "#{APP_CONFIG[:site_url]}#{ticket_path(ticket)}"
 
 		%p
 			#{h @changed_tickets.count} Tickets Modificados
 
 		%ul
 			-@changed_tickets.each do |ticket|
-				%li=link_to ticket.title, ticket_path(ticket)
+				%li=link_to ticket.title, "#{APP_CONFIG[:site_url]}#{ticket_path(ticket)}"
