@@ -1,0 +1,20 @@
+!!!
+%html
+	%head
+		%meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+	%body
+		%p
+			#{h @new_tickets.count} Nuevos Tickets
+
+		%ul	
+			-@new_tickets.each do |ticket|
+				%li=link_to ticket.title, ticket_path(ticket)
+
+		%p
+			#{h @changed_tickets.count} Tickets Modificados
+
+		%ul
+			-@changed_tickets.each do |ticket|
+				%li=link_to ticket.title, ticket_path(ticket)			
+
+

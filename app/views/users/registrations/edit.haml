@@ -1,26 +1,33 @@
 %h1 Editar usuario #{@user.login}
+
 =form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
-	%p
-		=f.label 'Nombre'
-		=f.text_field :name
-	%p
-		=f.label 'login'
-		=f.text_field :login
-	%p
-		=f.label 'email'
-		=f.text_field :email
-	%p
-		= f.label 'password', 'Contraseña'
-		= f.password_field :password
-	%p
-		= f.label 'password_confirmation', 'Confirmar Contraseña'
-		= f.password_field :password_confirmation
-	%p
-		= f.label 'current_password', 'Contraseña Actual'
-		= f.password_field :current_password
-	%p
-		= f.label 'Grupos: '
-		-@user.groups.each do |group|
-			=group.name
-			%br/
+	%div.form	
+		%div.grid_3
+			%p
+				=f.label 'Nombre'
+				=f.text_field :name
+			%p
+				=f.label 'login'
+				=f.text_field :login
+			%p
+				=f.label 'email'
+				=f.text_field :email
+			%p
+				= f.label 'password', 'Contraseña'
+				= f.password_field :password
+			%p
+				= f.label 'password_confirmation', 'Confirmar Contraseña'
+				= f.password_field :password_confirmation
+			%p
+				= f.label 'current_password', 'Contraseña Actual'
+				= f.password_field :current_password
+			%p
+				= f.label 'Grupos: '
+				-@user.groups.each do |group|
+					=group.name
+					%br/
+		%div.grid_3
+			%p
+				=f.label 'Notificaciones'
+				=f.select :notification_preference, [["Inmediatas", "inmediatly"], ["Diarias", "daily"], ["Semanales", "weekly"]]
 	%p= f.submit 'Actualizar', :class => "submit"

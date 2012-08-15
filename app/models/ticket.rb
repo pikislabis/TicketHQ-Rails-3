@@ -15,7 +15,7 @@ class Ticket < ActiveRecord::Base
   validates_presence_of :project_id
   
   after_create do |ticket|
-    ticket.project.user_subs.each do |user|
+    ticket.project.user_subs.where(:notification_preference => "inmediatly").each do |user|
 			if observe_project?(user, ticket.project)
       	ProjectMailer.ticket_create(user, ticket).deliver
 			end
@@ -23,7 +23,7 @@ class Ticket < ActiveRecord::Base
   end
   
   after_update do |ticket|
-    ticket.user_subs.each do |user|
+    ticket.user_subs.where(:notification_preference => "inmediatly").each do |user|
 			if observe_project?(user, ticket.project)
       	TicketMailer.ticket_change(user, ticket).deliver
 			end

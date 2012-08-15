@@ -58,6 +58,20 @@ class TicketMailer < ActionMailer::Base
     mail(:to => user.email, :subject => "[#{APP_CONFIG[:site_name]}] Cambios en un ticket")
   end
   
+  def daily_notification(user)
+    @projects = user.project_subs
+    @new_tickets = Ticket.where("created_at >= ?", 1.day.ago).select{|t| @projects.include? t.project}
+    @changed_tickets = user.ticket_subs.where("updated_at >= ?", 1.day.ago)
+    mail(:to => user.email, :subject => "[#{APP_CONFIG[:site_name]}] Reporte diario")
+  end
+
+  def weekly_notification(user)
+    @projects = user.project_subs
+    @new_tickets = Ticket.where("created_at >= ?", 1.week.ago).select{|t| @projects.include? t.project}
+    @changed_tickets = user.ticket_subs.where("updated_at >= ?", 1.week.ago)
+    mail(:to => user.email, :subject => "[#{APP_CONFIG[:site_name]}] Reporte semanal")
+  end
+
   def wrong_mail(user)
     @projects = user.groups.map{|x| x.projects unless !x.make}.flatten.uniq.delete_if{|y| y.nil?}
     mail(:to => user.email, :subject => "[#{APP_CONFIG[:site_name]}] Error en mail")
