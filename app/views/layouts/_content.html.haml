@@ -1,6 +1,7 @@
 #nav
 	%ul
 		%li= link_to 'Tickets', :controller => "/tickets", :action => 'index'
+		%li= link_to 'Asignados', users_path
 		-if params[:controller] == 'projects' and !params[:id].blank? and Project.proyectos(current_user,"make").include? Project.find(params[:id])
 			%li= link_to 'Nuevo ticket', new_project_ticket_path(@project.id)			
 		-else
