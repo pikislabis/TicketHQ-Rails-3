@@ -2,31 +2,25 @@
 =form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
 	%p
 		=f.label 'Nombre'
-		%br/
 		=f.text_field :name
 	%p
 		=f.label 'login'
-		%br/
 		=f.text_field :login
 	%p
 		=f.label 'email'
-		%br/
 		=f.text_field :email
 	%p
 		= f.label 'password', 'Contraseña'
-		%br/
 		= f.password_field :password
 	%p
 		= f.label 'password_confirmation', 'Confirmar Contraseña'
-		%br/
 		= f.password_field :password_confirmation
 	%p
 		= f.label 'current_password', 'Contraseña Actual'
-		%br/
 		= f.password_field :current_password
 	%p
 		= f.label 'Grupos: '
-		-for group in Group.find(:all)
-			%br/
+		-@user.groups.each do |group|
 			=group.name
+			%br/
 	%p= f.submit 'Actualizar', :class => "submit"
