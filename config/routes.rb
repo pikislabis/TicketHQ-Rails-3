@@ -14,6 +14,8 @@ TicketHQ::Application.routes.draw do
     resources :tickets
   end
   
+  get '/labels/:name' => 'tickets#labels', :as => 'labels'
+
   match '/incoming_mails' => 'incoming_mails#create'
   
   match '/search' => 'tickets#advanced_search', :as => 'search'

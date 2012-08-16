@@ -2,5 +2,5 @@
 	%h2 Etiquetas
 	%ul#tagList
 		-@labels.each do |label, count|
-			%li=link_to label, '#', {:style => "font-size: #{count * 10}px"}
+			%li=link_to label, labels_path(label), {:style => "font-size: #{count * 10}px"}
 	

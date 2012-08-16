@@ -218,6 +218,11 @@ class TicketsController < ApplicationController
       format.mobile { render :layout => false  }
     end
   end
+
+  def labels
+  	projects = Project.proyectos(current_user, "view").map(&:id)
+  	@tickets = Ticket.joins(:labels, :project).where(:'labels.name' => params[:name], :'projects.id' => projects)
+  end
   
   private
     
