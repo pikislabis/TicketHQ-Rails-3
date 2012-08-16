@@ -18,4 +18,9 @@ module ApplicationHelper
 		end
 		observe
 	end
+
+	def label_size(labels, element)
+		(((labels[element] / labels.map{|k,v| labels[k]}.sum.to_f) * 100) + 5).to_i
+	end
+
 end

@@ -1,6 +1,6 @@
 #tagCloud
 	%h2 Etiquetas
 	%ul#tagList
-		-@labels.each do |label, count|
-			%li=link_to label, labels_path(label), {:style => "font-size: #{count * 10}px"}
+		-@labels.sort_by{|label, count| count}.reverse.each do |label, count|
+			%li=link_to label, labels_path(label), {:title => label, :style => "font-size: #{label_size(@labels, label)}px"}
 	
