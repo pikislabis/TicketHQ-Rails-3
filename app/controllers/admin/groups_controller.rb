@@ -36,7 +36,7 @@ class Admin::GroupsController < AdminController
 			redirect_to admin_groups_path
 		else
 			flash[:error] = "Ha habido un error al actualizar el grupo."
-			@user.errors.each {|x| flash[:error] += "<br/> - El campo <b>#{x[0]}</b> #{x[1]}"}
+			@group.errors.each {|x| flash[:error] += "<br/> - El campo <b>#{x[0]}</b> #{x[1]}"}
 			render :action => 'edit'
 		end
 	end

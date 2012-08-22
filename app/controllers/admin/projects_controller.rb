@@ -13,6 +13,22 @@ class Admin::ProjectsController < AdminController
 		#TODO: add_status_link. Estados configurables
 	end
 
+	def edit
+		@project = Project.find(params[:id])
+	end
+
+	def update
+		@project = Project.find(params[:id])
+		if @project.update_attributes(params[:project])	
+			flash[:notice] = "El proyecto ha sido actualizado de forma satisfactoria."
+			redirect_to admin_projects_path
+		else
+			flash[:error] = "Ha habido un error al actualizar el proyecto."
+			@project.errors.each {|x| flash[:error] += "<br/> - El campo <b>#{x[0]}</b> #{x[1]}"}
+			render :action => 'edit'
+		end
+	end
+
 	def create
 		@project = Project.new(params[:project])
 		if params[:statuses] == "default"
