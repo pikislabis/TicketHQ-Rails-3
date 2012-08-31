@@ -61,7 +61,7 @@
 			%td.ticket_id= "##{record.id}"
 			%td
 				= image_tag record.user.gravatar_url(:size => 30)
-				.name= record.user.login
+				.name= record.user.username
 			%td= record.text1
 			%td= record.text2
 			%td

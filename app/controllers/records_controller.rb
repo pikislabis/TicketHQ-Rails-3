@@ -42,7 +42,7 @@ class RecordsController < ApplicationController
   	  if ticket1.assigned_to != ticket2.assigned_to and ticket2.assigned_to.nil?
 				cambios << " Se ha eliminado la asignacion del ticket."
 			elsif ticket1.assigned_to != ticket2.assigned_to and !ticket2.assigned_to.nil?
-  	    cambios << " Asignado a #{User.find(ticket2.assigned_to).login}."
+  	    cambios << " Asignado a #{User.find(ticket2.assigned_to).username}."
   	  end
   	  cambios
   	end

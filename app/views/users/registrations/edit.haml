@@ -1,4 +1,4 @@
-%h1 Editar usuario #{@user.login}
+%h1 Editar usuario #{@user.username}
 
 =form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
 	%div.form	
@@ -8,7 +8,7 @@
 				=f.text_field :name
 			%p
 				=f.label 'id'
-				=f.text_field :login
+				=f.text_field :username
 			%p
 				=f.label 'email'
 				=f.text_field :email

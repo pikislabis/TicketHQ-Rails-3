@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120815155636) do
+ActiveRecord::Schema.define(:version => 20120831234113) do
 
   create_table "attaches", :force => true do |t|
     t.integer  "record_id"
@@ -122,7 +122,7 @@ ActiveRecord::Schema.define(:version => 20120815155636) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                                        :null => false
     t.datetime "updated_at",                                        :null => false
-    t.string   "login"
+    t.string   "username"
     t.string   "name"
     t.boolean  "admin"
     t.boolean  "enabled"

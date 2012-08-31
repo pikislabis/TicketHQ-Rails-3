@@ -7,7 +7,6 @@ class CreateTickets < ActiveRecord::Migration
       t.integer :user_id
       t.string :state
       t.string :priority
-      t.string :type_inc
       t.integer :assigned_to
 
       t.timestamps

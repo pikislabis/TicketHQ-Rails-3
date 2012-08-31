@@ -15,7 +15,7 @@
 	-for user in @users
 		%tr
 			%td= image_tag user.gravatar_url(:size => 30)
-			%td= user.login
+			%td= user.username
 			%td= user.name
 			%td= user.email
 			%td

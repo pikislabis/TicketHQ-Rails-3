@@ -9,9 +9,11 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :confirmable       
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :login, :name, :admin, :group_ids, :notification_preference
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :username, :name, :admin, :group_ids, :notification_preference
   cattr_accessor :current_user
   
+  validates :username, :uniqueness => true
+
   has_and_belongs_to_many :groups
   has_many :tickets
   has_many :ticket_subscribes

@@ -1,11 +1,11 @@
-%h1 Editar usuario #{@user.login}
+%h1 Editar usuario #{@user.username}
 = form_for :user, :url => admin_user_path, :html => { :method => :put } do |f|
 	%p
 		=label_tag 'Nombre'
 		=f.text_field :name
 	%p
 		=label_tag 'identificador'
-		=f.text_field :login
+		=f.text_field :username
 	%p
 		=label_tag 'email'
 		=f.text_field :email
