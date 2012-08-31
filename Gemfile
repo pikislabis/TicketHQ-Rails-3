@@ -48,6 +48,7 @@ gem "paperclip"
 
 group :development do
 	gem 'sqlite3'
+	gem 'railroady'
 end
 
 group :production do

@@ -95,6 +95,7 @@ GEM
       rack
     rack-test (0.6.1)
       rack (>= 1.0)
+    railroady (1.0.8)
     rails (3.2.0)
       actionmailer (= 3.2.0)
       actionpack (= 3.2.0)
@@ -168,6 +169,7 @@ DEPENDENCIES
   mysql
   nested_form
   paperclip
+  railroady
   rails (= 3.2)
   railties (= 3.2)
   ransack
