@@ -8,6 +8,9 @@ tickethq: &tickethq
   adapter: mysql
   pool: 5
   timeout: 8000
+  username: tickethq
+  password: tickethq
+  host: localhost
 
 development:
   adapter: sqlite3
